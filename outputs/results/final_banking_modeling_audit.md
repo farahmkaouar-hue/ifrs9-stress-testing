@@ -5,7 +5,7 @@
 ## Synthese des statuts
 | OK | WATCH |
 | --- | --- |
-| 8 | 6 |
+| 9 | 5 |
 
 ## Controles detailles
 | area | control | status | observation | recommended_action |
@@ -23,7 +23,7 @@
 | Satellite macro | Backtesting walk-forward | OK | 120 observations de backtesting disponibles. | Utiliser MAE/RMSE walk-forward plutot que le R2 seul pour la justification. |
 | Capital | Impact CET1 | WATCH | 5/7 scenarios passent sous le seuil reglementaire CET1. | Presenter CET1/RWA comme hypothese pedagogique; remplacer par donnees banque si disponible. |
 | Livrables | Couverture des livrables | OK | Couverture moyenne des piliers=100.0%. | Conserver outputs/results et outputs/figures pour la soutenance. |
-| Execution | Portabilite environnement | WATCH | .venv absent. | Executer scripts/setup_environment.ps1. |
+| Execution | Portabilite environnement | OK | Configuration .venv locale coherente. | Recreer l'environnement avec scripts/setup_environment.ps1 avant demonstration. |
 
 ## Points a annoncer clairement
 - Les resultats sont solides pour un prototype academique de stress testing IFRS 9.

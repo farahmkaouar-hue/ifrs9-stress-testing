@@ -244,9 +244,12 @@ def compute_pd_stressed(
 
     Returns : Series PD_stressed par prêt
     """
-    # PD baseline individuelle. En dashboard, on tolere l'absence du modele
-    # pickle si la colonne PD_pred a deja ete calculee par le notebook baseline.
-    if champion_pd_model is not None and hasattr(champion_pd_model, "predict_proba") and features:
+    # PD baseline individuelle. Le dashboard charge deja PD_pred depuis
+    # ecl_baseline.parquet; la reutiliser evite de scorer plusieurs millions
+    # de lignes a chaque interaction Streamlit.
+    if "PD_pred" in df.columns:
+        pd_base = df["PD_pred"].astype(float)
+    elif champion_pd_model is not None and hasattr(champion_pd_model, "predict_proba") and features:
         available_features = [f for f in features if f in df.columns]
         if available_features:
             X_base = df[available_features].fillna(0)

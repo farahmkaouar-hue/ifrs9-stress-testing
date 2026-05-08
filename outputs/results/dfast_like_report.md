@@ -79,7 +79,7 @@ Le portefeuille est derive de Lending Club. Les variables macroeconomiques provi
 | Satellite macro | Backtesting walk-forward | OK | 120 observations de backtesting disponibles. | Utiliser MAE/RMSE walk-forward plutot que le R2 seul pour la justification. |
 | Capital | Impact CET1 | WATCH | 5/7 scenarios passent sous le seuil reglementaire CET1. | Presenter CET1/RWA comme hypothese pedagogique; remplacer par donnees banque si disponible. |
 | Livrables | Couverture des livrables | OK | Couverture moyenne des piliers=100.0%. | Conserver outputs/results et outputs/figures pour la soutenance. |
-| Execution | Portabilite environnement | WATCH | .venv absent. | Executer scripts/setup_environment.ps1. |
+| Execution | Portabilite environnement | OK | Configuration .venv locale coherente. | Recreer l'environnement avec scripts/setup_environment.ps1 avant demonstration. |
 
 ## 9. Conclusion prudentielle
 Le prototype permet d'identifier les scenarios les plus penal en ECL, les zones de rupture CET1 et les reserves methodologiques. Pour une utilisation bancaire reelle, il faut ajouter donnees internes, capital reel, validation externe independante, monitoring et revue modele.
