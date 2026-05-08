@@ -1,0 +1,8 @@
+scenario_key,Scenario,Expected_loss_Y1_M$,ECL_Y1_M$,RWA_Y1_M$,CET1_post_stress_%,PD_mean_%,LGD_mean_%,Stage3_%,Capital_shortfall_7pct_M$,Management_action
+covid_2020,Crise COVID-19,9267.44,13070.47,31047.67,-9.661,93.404,71.822,17.01,5172.85,"Recapitaliser, vendre actifs risques, suspendre origination risquee et activer plan de remediation."
+crisis_2008,Crise 2008,8125.72,11928.76,29437.31,-7.475,90.112,73.34,15.92,4261.05,"Recapitaliser, vendre actifs risques, suspendre origination risquee et activer plan de remediation."
+severe,Severe,5619.74,9422.78,28700.72,-1.555,79.013,67.567,14.28,2455.35,"Recapitaliser, vendre actifs risques, suspendre origination risquee et activer plan de remediation."
+rate_shock,Choc Taux,4958.18,8761.22,28193.99,0.06,66.434,72.482,13.4,1956.66,"Recapitaliser, vendre actifs risques, suspendre origination risquee et activer plan de remediation."
+adverse,Adverse,4700.91,8503.94,28169.44,0.699,70.849,66.254,13.67,1774.96,"Recapitaliser, vendre actifs risques, suspendre origination risquee et activer plan de remediation."
+ukraine_2022,Inflation Ukraine 2022,2665.53,6468.57,27306.17,5.939,56.072,66.283,12.88,289.72,"Limiter dividendes, reduire croissance RWA, renforcer recouvrement et pricing risque."
+market_2018,Choc Marche 2018,934.29,4737.33,26799.52,10.573,47.23,60.394,12.44,0.0,"Maintenir coussins, suivi normal et revue trimestrielle des limites."

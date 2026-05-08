@@ -1,0 +1,2 @@
+intensity_critical,cet1_achieved_%,target_cet1_%,ECL_critical_M$,ECL_baseline_M$,ECL_lift,macro_critical
+0.445,4.56,4.5,7419.12,3803.04,1.95,"{'UNRATE': 6.67, 'GDPC1_growth': -0.81, 'FEDFUNDS': 1.5, 'HY_SPREAD': 10.18, 'CPI_change': 0.93, 'DRCCLACBS': 4.4}"

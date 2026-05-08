@@ -1,0 +1,8 @@
+Scenario,ECL_lift_ge_1,Delta_ECL_non_negative,PD_stressed_ge_baseline,PD_lift_ge_floor,validation_status
+Adverse,True,True,True,True,OK
+Severe,True,True,True,True,OK
+Choc Taux,True,True,True,True,OK
+Choc Marche 2018,True,True,True,True,OK
+Inflation Ukraine 2022,True,True,True,True,OK
+Crise 2008,True,True,True,True,OK
+Crise COVID-19,True,True,True,True,OK

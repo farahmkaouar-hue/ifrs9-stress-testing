@@ -1,0 +1,8 @@
+Model,R²,R²_adj,RMSE,MAE,AIC,BIC,DW,DW_ok,DR_base_check,DR_shock_check,economic_ok,stress_lift_check
+OLS,-19.4046,-29.6069,0.0311,0.028,-132.0,-123.3,0.092,✗ Problème autocorrélation,0.1064,0.2813,True,2.6425
+Ridge,-11.6034,-17.905,0.0245,0.0212,,,0.14,✗ Problème autocorrélation,0.1114,0.2745,True,2.4645
+LASSO,-13.3472,-20.5208,0.0261,0.023,,,0.123,✗ Problème autocorrélation,0.1099,0.2763,True,2.5146
+ElasticNet,-16.2219,-24.8328,0.0286,0.0255,,,0.105,✗ Problème autocorrélation,0.1081,0.279,True,2.5802
+RandomForestReg,-87.3823,-131.5734,0.0648,0.0608,,,0.066,✗ Problème autocorrélation,0.1653,0.2166,True,1.3102
+GradientBoostingReg,-89.2783,-134.4174,0.0654,0.0614,,,0.069,✗ Problème autocorrélation,0.1625,0.206,True,1.2673
+XGBoostReg,-89.7727,-135.159,0.0656,0.0609,,,0.092,✗ Problème autocorrélation,0.1574,0.2138,True,1.3579

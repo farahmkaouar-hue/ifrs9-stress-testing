@@ -1,0 +1,10 @@
+pillar,weight,score,coverage_%,missing,expert_comment
+EDA,10,10.0,100.0,,"EDA couvre cible, segmentation, cycle macro et censure vintage."
+Preprocessing,12,12.0,100.0,,Pipeline auditable avec dictionnaire FRED et controles qualite.
+Baseline ECL,12,12.0,100.0,,"PD individuelle, ECL baseline et validation temporelle presentes."
+Satellites macro,12,12.0,100.0,,Lien macro-PD explicite pour transformer les chocs en defaut attendu.
+Stress testing,16,16.0,100.0,,Plusieurs moteurs de stress sont compares et un champion est documente.
+Scenarios historiques,10,10.0,100.0,,"COVID-19, marche 2018, crise 2008, adverse, severe et taux sont actifs."
+Resilience CET1,10,10.0,100.0,,Impact capital et point de rupture sont disponibles.
+Application,10,10.0,100.0,,"Dashboard Streamlit centralise portefeuille, stress, resilience et validation."
+Communication,8,8.0,100.0,,"Trois presentations separees documentent methode, code et outputs."

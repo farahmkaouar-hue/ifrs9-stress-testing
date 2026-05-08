@@ -1,0 +1,19 @@
+.env
+.env.local
+.venv/
+.claude/
+*.pyc
+*.pyo
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+*.tmp
+*.bak
+*.log
+
+# Large/generated artifacts
+data/loan.csv
+outputs/*.parquet
+outputs/models/*.pkl
+outputs/tmp*/
+outputs/test_preprocessing_quality/

@@ -1,0 +1,4 @@
+model_id,version,owner,validation_status,approval_status,last_review_date
+PD_CHAMPION,v1.0,Risk Modeling,Validated for PFA prototype,Model Committee simulated,2026-05-08
+SATELLITE_MACRO_PD,v1.0,Stress Testing,Backtesting required before production,Conditional approval,2026-05-08
+BASEL_RWA_STANDARDIZED,v1.0,Regulatory Capital,Rule-based benchmark,Approved for simulation,2026-05-08

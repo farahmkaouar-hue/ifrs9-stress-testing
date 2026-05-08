@@ -1,0 +1,8 @@
+variable,fred_series,frequency,role,business_use
+UNRATE,UNRATE,M,Predictor PD/stress,Chomage: hausse attendue de la PD
+FEDFUNDS,FEDFUNDS,M,Predictor PD/LGD/EAD,Taux directeur: choc de taux et cout du credit
+CPI,CPIAUCSL,M,Source CPI_change,Inflation annuelle
+GDPC1,GDPC1,Q,Source GDPC1_growth,Cycle economique reel
+GDPC1_growth,GDPC1,Q->M,Predictor PD/stress,Contraction PIB: hausse attendue du risque
+HY_SPREAD,BAMLH0A0HYM2,D->M,Predictor PD/LGD,Tension marche credit high-yield
+DRCCLACBS,DRCCLACBS,Q->M,Calibration target,Taux officiel de delinquence bancaire

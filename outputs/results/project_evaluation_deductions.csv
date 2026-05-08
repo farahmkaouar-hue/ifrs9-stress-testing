@@ -1,0 +1,4 @@
+risk,points,action
+Capital/RWA encore pedagogique,5,Remplacer ou justifier les hypotheses CET1 avec donnees banque si disponibles.
+Validation externe limitee,3,Ajouter benchmark externe ou stress historique supplementaire si le temps le permet.
+Notebooks a reexecuter apres les derniers changements,2,Reexecuter 01 a 07 avant soutenance pour figer les sorties finales.

@@ -1,0 +1,4 @@
+Model,R²,R²_adj,RMSE,MAE,AIC,BIC,DW,DW_ok
+OLS,-0.0599,-0.5899,0.008,0.0069,-167.3,-161.6,0.326,✗ Problème autocorrélation
+Ridge,-0.1135,-0.6702,0.0082,0.0068,,,0.308,✗ Problème autocorrélation
+LASSO,-0.9999,-1.9998,0.011,0.0085,,,0.168,✗ Problème autocorrélation

@@ -1,0 +1,5 @@
+scenario_key,Scenario,weight,ECL_M$,weighted_ECL_M$
+baseline,Baseline,0.4,3803.0378761821767,1521.2151504728708
+adverse,Adverse,0.35,7764.06,2717.421
+severe,Severe,0.25,8431.24,2107.81
+forward_looking,ECL Forward-Looking,1.0,6346.44615047287,6346.44615047287

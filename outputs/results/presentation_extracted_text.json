@@ -1,0 +1,34 @@
+[
+  {
+    "slide": 1,
+    "text": "PROJET DE FIN D'ANNÉE\nCycle Ingénieur  ·  2025–2026\nChoc Macroéconomique\nChoc de Taux d'Intérêt\nChoc Combiné (2008)\nMoteur de Stress\nTesting IFRS 9\nAnalyse de l'Impact des Chocs sur l'ECL\net la Résilience Bancaire\nObjectif\nProblèmes\nDonnées\nDescription\nMéthodologie\nECL  =  PD_stressed  ×  LGD_stressed  ×  EAD_stressed"
+  },
+  {
+    "slide": 2,
+    "text": "OBJECTIF\nObjectif & Question de Recherche\nCONTEXTE\nL'IFRS 9 exige une estimation prospective des pertes (ECL) intégrant les conditions économiques futures.\nLe stress testing pousse cette logique à l'extrême : que se passe-t-il si le pire scénario se réalise ?\nLes régulateurs (BCE, EBA, Bâle III) exigent que les banques démontrent leur résistance face aux chocs sévères.\nQUESTION DE RECHERCHE\n“\nComment les chocs macroéconomiques et de taux d'intérêt affectent-ils l'ECL d'un portefeuille de crédit — et jusqu'où la banque peut-elle résister à ces chocs ?\nOBJECTIF COMPLÉMENTAIRE\nIdentifier le point de rupture réglementaire via le Reverse Stress Testing (seuil CET1 Bâle III = 4,5%)\nProjet de Fin d'Année — Cycle Ingénieur  ·  Stress Testing IFRS 9  ·  2025–2026"
+  },
+  {
+    "slide": 3,
+    "text": "DÉFIS\nProblèmes Probables\nDéséquilibre des Classes\nTaux de défaut ~7% → le modèle ignore la classe minoritaire.\nSolution\nSMOTE · Pondération des classes\nValeurs Manquantes\nVariables emprunteurs ou macro incomplètes sur la période.\nSolution\nImputation KNN · Médiane par variable\nInterprétabilité du Modèle\nXGBoost = boîte noire → problème réglementaire.\nSolution\nSHAP Values · Explicabilité par choc\nStabilité Temporelle\nRelation macro–défauts change selon la conjoncture.\nSolution\nWalk-forward · Test sur crise 2008–2009\nProjet de Fin d'Année — Cycle Ingénieur  ·  Stress Testing IFRS 9  ·  2025–2026"
+  },
+  {
+    "slide": 4,
+    "text": "DONNÉES\nSources de Données\nSOURCE PRINCIPALE\nLending Club\nkaggle.com  ·  CSV  ·  Gratuit\nRôle : Base centrale — modéliser PD, LGD et EAD sur données réelles avec crise 2008.\n2,26M prêts · 74 variables · 2007–2018\nVariable cible : statut de défaut (0/1)\nCaractéristiques emprunteurs (FICO, DTI, revenu)\nConditions du prêt (montant, taux, durée, objet)\nCrise 2008–2009 incluse → calibration réelle\nSOURCE PRINCIPALE\nFRED Database\nfred.stlouisfed.org  ·  CSV  ·  API Python\nRôle : Variables macro intégrées comme features dans les modèles → permettent le stress.\nPIB réel (GDPC1) · Chômage (UNRATE)\nFed Funds Rate · Taux hypothécaire 30 ans\nSpread BAA–AAA (risque perçu du marché)\nInflation CPI (CPIAUCSL) · S&P 500\nAPI Python : pip install fredapi\nCALIBRATION — CET1 CONSTRUIT\nFFIEC Call Reports\ncdr.ffiec.gov  ·  CSV  ·  Trimestriel\nRôle : Construire le CET1 US 2007–2018 à partir des bilans réels. CET1 = RCFD3210 / RCFDA223.\nRCFD3210 : Capital CET1 en dollars\nRCFDA223 : Actifs pondérés par le risque (RWA)\nCET1 % = RCFD3210 / RCFDA223 × 100\n2007Q1 → 2018Q4 · ~5 800 banques/trimestre\nTéléchargement : cdr.ffiec.gov/public/PWS/DownloadBulkData.aspx\nProjet de Fin d'Année — Cycle Ingénieur  ·  Stress Testing IFRS 9  ·  2025–2026"
+  },
+  {
+    "slide": 5,
+    "text": "DESCRIPTION\nDescription des Données\n2,26M\nPrêts\n~74\nVariables\n11 ans\nPériode (2007–18)\n~7%\nTaux de Défaut\nCSV\nFormat\nTAUX DE DÉFAUT PAR PÉRIODE\n3%\n2007\n8%\n2008\n12%\n2009\n10%\n2010\n7%\n2012\n6%\n2015\n7%\n2018\n▲ Crise 2008\nEmprunteur\nScore FICO · Revenu · DTI\nAncienneté · Propriétaire/loc.\nPrêt\nMontant · Taux · Durée\nObjet · Statut remboursement\nMacro (FRED)\nPIB · Chômage · Inflation\nFed Rate · Spread · S&P 500\n★  La période 2007–2018 couvre la crise financière de 2008–2009 → calibration sur un stress réel historique"
+  },
+  {
+    "slide": 6,
+    "text": "MÉTHODOLOGIE\nArchitecture du Projet\n1\nDonnées & Fondations\nNettoyage Lending Club\nFusion FRED + FFIEC (CET1 construit)\nEDA & Feature Engineering\nStaging IFRS 9 (Stage 1 / 2 / 3)\nECL de référence (point zéro)\n2\nModélisation ML\nXGBoost PD + SHAP Values\nModèles Satellites Macro (PD/LGD/EAD)\nMatrice de Markov — migration Stage\nCalibration crise 2008–2009\nValidation walk-forward temporelle\n3\nLivrable & Dashboard\nMoteur ECL multi-scénarios (stress)\nDashboard Streamlit interactif\nValidation COVID-2020 + Guerre Ukraine 2022\nAPI FastAPI + Rapport DFAST\nAnalyse de résilience & Reverse Stress Test\n→\n→\nChoc → ΔPD · ΔLGD · ΔEAD → Migration Stage → ΔECL → ΔCET1 → Décision managériale\nProjet de Fin d'Année — Cycle Ingénieur  ·  Stress Testing IFRS 9  ·  2025–2026"
+  },
+  {
+    "slide": 7,
+    "text": "MODÈLES SATELLITES\nComment les Chocs Affectent PD, LGD et EAD\nPour chaque choc :  PD_stressed × LGD_stressed × EAD_stressed  =  ECL_stressed\nPD\nProbabilité de Défaut\nModèle Satellite Macro-conditionnel\nPD_stressed = f(chômage↑, PIB↓, taux↑)\nVariables FRED intégrées comme features dans XGBoost. Sous scénario adverse, on injecte les nouvelles valeurs → le modèle recalcule automatiquement.\nCalibré sur la hausse des défauts 2008–2009\nLGD\nPerte en Cas de Défaut\nCoefficient de Stress sur Garanties\nLGD_str = LGD_base × (1 + α × choc)\nUn choc de taux déprécie les actifs → garanties perdent de la valeur → taux de recouvrement baisse → LGD augmente. α calibré sur 2008.\nScénario sévère → α entre +20% et +30%\nEAD\nExposition au Défaut\nAjustement du Facteur CCF\nEAD_str = Capital_restant × CCF_str\nSous stress, les emprunteurs en difficulté tirent davantage sur leurs lignes avant le défaut. Le CCF stressé reflète cette exposition accrue.\nAjustement modéré — EAD moins sensible que PD/LGD\nRésilience :  CET1 post-stress = Capital initial (FFIEC ~12%)  −  ECL_stressed    →    CET1 < 4,5% : Zone critique  |  CET1 = 0% : Point de rupture\nProjet de Fin d'Année — Cycle Ingénieur  ·  Stress Testing IFRS 9  ·  2025–2026"
+  },
+  {
+    "slide": 8,
+    "text": "RÉSULTATS & VALIDATION\nRésultats Attendus & Stratégie de Validation\nLIVRABLES VISUELS DU PROJET\n1\nECL par Scénario\n→ ECL_adverse = x2 à x4 vs baseline\n2\nHeatmap d'Impact\n→ Quel choc impacte PD / LGD / EAD\n3\nMigration de Stage\n→ 30% Stage1 → 2/3 sous stress sévère\n4\nCourbe Résilience CET1\n→ Point rupture : CET1 tombe à 4,5%\nSTRATÉGIE DE VALIDATION\nBASE\nLending Club\n2007 – 2018\nModèles PD / LGD / EAD\nCalibration crise 2008–2009\n↓\nHORS-ÉCHANTILLON\nFreddie Mac\n2019 – 2023\nTest hors-échantillon\nCOVID-2020 + Ukraine-2022\n↓\nRÉSULTAT\nLe modèle se généralise-t-il ?\nAUC > 0.70 sur les 2 crises\nErreur défaut simulé vs réel\n< 2% → modèle validé ✓\nEntraîné sur Lending Club 2007–2018  ·  Validé sur Freddie Mac 2020 & 2022  →  Généralisation prouvée sur 3 crises distinctes"
+  }
+]
