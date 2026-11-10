@@ -1,51 +1,49 @@
-# Projet IFRS 9 Stress Testing Bancaire
+# IFRS 9 et stress testing bancaire
 
-Ce projet construit un moteur IFRS 9 oriente stress testing bancaire: preparation du portefeuille Lending Club, modelisation PD/LGD/EAD, calcul ECL baseline, scenarios macroeconomiques, comparaison de plusieurs approches de stress, validation et dashboard Streamlit.
+Moteur de calcul des pertes de crédit attendues (ECL) selon IFRS 9, appliqué à un portefeuille de prêts Lending Club, avec des stress tests macroéconomiques et un tableau de bord Streamlit.
 
-Pour la version finale a remettre, commencer par `LIVRAISON_FINALE.md`.
+Projet de fin d'année (PFA), ESSAI.
 
-## Structure recommandee
+## Résultats
 
-| Dossier/Fichier | Role |
+- **7 scénarios de stress** testés : adverse, sévère, choc de taux, marché 2018, inflation Ukraine 2022, crise de 2008 et crise du COVID-19.
+- **Scénario le plus sévère : COVID-19**, avec des pertes attendues multipliées par **2,64** (de 3,8 à 10,0 milliards de dollars) ; la crise de 2008 les multiplie par 2,52.
+- **Modèle de PD retenu : Random Forest**, avec AUC 0,693, Gini 0,386, KS 0,29 et PSI 0,067 (population stable), en validation walk-forward. La régression logistique obtient AUC 0,674.
+
+![Pertes attendues par scénario de stress](outputs/fig_26_stress_ecl_comparison.png)
+
+## Démarche
+
+1. **Exploration et préparation des données** : qualité, valeurs manquantes, taux de défaut par segment et par millésime.
+2. **Modélisation PD, LGD, EAD** et calcul de l'ECL par stage IFRS 9.
+3. **Modèles satellites** reliant les taux de défaut aux variables macroéconomiques (FRED : chômage, PIB, spreads, taux, inflation).
+4. **Stress tests** : chocs sur PD, LGD et EAD par scénario, migrations entre stages, ECL prospective.
+5. **Résilience** : impact sur le ratio CET1 et reverse stress test.
+6. **Restitution** dans un tableau de bord Streamlit.
+
+## Structure
+
+| Dossier | Contenu |
 |---|---|
-| `notebooks/01_EDA.ipynb` | Exploration initiale: distribution, qualite, defauts, variables metier. |
-| `notebooks/02_Preprocessing.ipynb` | Nettoyage, encodage, feature engineering, LGD/EAD, fusion macro. |
-| `notebooks/03_Baseline_ECL.ipynb` | Modeles PD et calcul ECL IFRS 9 baseline. |
-| `notebooks/04_Modeles_Satellites_Macro.ipynb` | Modeles macro-satellites et sensibilites economiques. |
-| `notebooks/05_Stress_Testing.ipynb` | Chocs macro, stress PD/LGD/EAD, ECL stressee. |
-| `notebooks/06_Resilience_Reverse_Stress.ipynb` | Impact CET1, resilience et reverse stress test. |
-| `notebooks/07_Stress_Testing_Validation_Avancee.ipynb` | Validation scenarios, Markov migration, forward-looking ECL, comparaison stress models. |
-| `notebooks/08_Banking_Expert_Review.ipynb` | Revue experte bancaire/developpement: date d'arrete, segmentation, RWA, capital stack, stress testing 1 an, projection T1-T5, gouvernance et audit trail. |
-| `src/` | Code reutilisable pour industrialiser les notebooks. |
-| `scripts/` | Lancement de validations et generation de rapports. |
-| `outputs/results/` | Rapports CSV/Markdown generes. |
-| `dashboard/app.py` | Interface Streamlit de restitution. |
+| `notebooks/` | Les 8 étapes, de l'exploration (01) à la revue finale (08) |
+| `src/` | Code réutilisable : préparation, moteur ECL, modèles satellites, scénarios |
+| `dashboard/app.py` | Tableau de bord Streamlit |
+| `outputs/` | Figures, tables de résultats et rapports |
+| `tests/` | Tests de la préparation des données et du moteur de stress |
+| `docs/` | Notes de travail et guide d'exécution |
 
-## Execution
+## Lancer le projet
 
-1. Recreer l'environnement portable si necessaire:
-   `powershell -ExecutionPolicy Bypass -File scripts/setup_environment.ps1`
-2. Installer les dependances manuellement si vous n'utilisez pas le script:
-   `pip install -r requirements.txt`
-3. Optionnel pour FRED: definir `FRED_API_KEY` dans l'environnement.
-4. Lancer les notebooks `01` a `08` dans l'ordre. Le notebook `07` execute la validation avancee et le notebook `08` montre la revue bancaire experte.
-5. Lancer le dashboard: `streamlit run dashboard/app.py`
+```bash
+pip install -r requirements.txt
+streamlit run dashboard/app.py
+```
 
-Les scripts restent executables separement pour debug, mais ils ne sont plus obligatoires si le notebook `07_Stress_Testing_Validation_Avancee.ipynb` a ete execute jusqu'au bout.
+Pour les données macroéconomiques, définir la variable d'environnement `FRED_API_KEY`. Les notebooks se lancent dans l'ordre, de `01` à `08`.
 
-Pour realigner la narration bancaire des notebooks 01 a 07 apres modification:
+## Limites
 
-`python scripts/align_notebooks_banking_story.py`
-
-## Points forts modeling/stress testing
-
-- Plusieurs modeles PD baseline peuvent etre compares.
-- Plusieurs modeles satellites macro sont prevus pour relier le risque au cycle economique.
-- Le stress testing ne se limite plus a un multiplicateur: il combine scenarios economiques, stress PD/LGD/EAD, Markov migration, forward-looking ECL, CET1 et reverse stress.
-- Les controles EDA/preprocessing generent des fichiers auditables: schema, valeurs manquantes, outliers, vintage default profile, dictionnaire FRED et audit global.
-- Le check-up final documente les reserves de gouvernance modele: niveau PD Lending Club, calibration, satellite macro, hypotheses CET1/RWA et environnement d'execution.
-- Le notebook 08 documente la vue quasi-professionnelle: portefeuille a date d'arrete, segmentation reglementaire, RWA, capital stack, stress testing a 1 an, decision management et audit trail.
-
-## Fichiers a ne pas versionner
-
-Les dossiers `.venv/`, `__pycache__/`, sorties lourdes, donnees brutes et cles API ne doivent pas etre ajoutes a Git. La cle FRED doit rester dans la variable d'environnement `FRED_API_KEY`, jamais dans le code.
+- Prototype académique, pas un outil de reporting réglementaire.
+- La PD moyenne de base est élevée (45 %), car le portefeuille Lending Club est plus risqué qu'un portefeuille bancaire classique.
+- Le pouvoir discriminant du modèle (AUC 0,69) et sa calibration restent à améliorer pour un usage en production.
+- Les hypothèses de capital (CET1, RWA) sont pédagogiques.
